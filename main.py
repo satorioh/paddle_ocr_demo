@@ -1,5 +1,8 @@
 from paddleocr import PaddleOCR
 
+# test_file = "./test/1.png"
+test_file = "./test/1.pdf"
+
 
 def main():
     # model = TextDetection(model_name="PP-OCRv5_mobile_det", model_dir="./models/PP-OCRv5_mobile_det_infer")
@@ -14,7 +17,7 @@ def main():
         text_recognition_model_name="PP-OCRv5_mobile_rec",
         text_recognition_model_dir="./models/PP-OCRv5_mobile_rec_infer",
     )
-    output = ocr.predict("./images/general_ocr_001.png")
+    output = ocr.predict(test_file)
     for res in output:
         res.print()
         res.save_to_img(save_path="./output/")
