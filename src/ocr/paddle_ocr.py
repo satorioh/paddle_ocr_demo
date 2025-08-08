@@ -1,12 +1,8 @@
 from paddleocr import PaddleOCR
 
-# test_file = "./test/1.png"
-test_file = "./test/1.pdf"
 
-
-def main():
-    # model = TextDetection(model_name="PP-OCRv5_mobile_det", model_dir="./models/PP-OCRv5_mobile_det_infer")
-    # model = TextRecognition(model_name="PP-OCRv5_mobile_rec", model_dir="./models/PP-OCRv5_mobile_rec_infer")
+def ocr_predict(file_path: str):
+    """Predict text in an image or PDF file using PaddleOCR."""
     ocr = PaddleOCR(
         device="cpu",  # 通过 device 参数指定使用 CPU 设备
         use_doc_orientation_classify=False,  # 通过 use_doc_orientation_classify 参数指定不使用文档方向分类模型
@@ -17,12 +13,8 @@ def main():
         text_recognition_model_name="PP-OCRv5_mobile_rec",
         text_recognition_model_dir="./models/PP-OCRv5_mobile_rec_infer",
     )
-    output = ocr.predict(test_file)
+    output = ocr.predict(file_path)
     for res in output:
         res.print()
-        res.save_to_img(save_path="./output/")
-        res.save_to_json(save_path="./output/res.json")
-
-
-if __name__ == "__main__":
-    main()
+        res.save_to_img(save_path="../output/")
+        res.save_to_json(save_path="../output/res.json")
