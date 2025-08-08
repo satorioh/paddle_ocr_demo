@@ -11,5 +11,5 @@ wheels/
 .idea
 output
 test
-models
-assets
+src/models
+src/assets

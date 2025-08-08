@@ -1,16 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import ocr_api
-from .config.globals import settings
-
-# test_file = "./test/1.png"
-test_file = "./test/2.pdf"
+from src.routers import ocr_api
+from src.config.globals import settings
 
 app = FastAPI(root_path=settings.API_PREFIX)
 
 origins = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 app.add_middleware(

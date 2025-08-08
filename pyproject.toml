@@ -8,5 +8,6 @@ dependencies = [
     "fastapi[standard]>=0.116.1",
     "paddleocr>=3.1.0",
     "paddlepaddle==3.1.0",
+    "python-multipart>=0.0.20",
     "setuptools>=80.9.0",
 ]
