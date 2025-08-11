@@ -24,10 +24,6 @@ ocr = PaddleOCR(
 def ocr_predict(file: str):
     """Predict text in an image or PDF file using PaddleOCR."""
     output = ocr.predict(file)
-    # for res in output:
-    #     res.print()
-    #     res.save_to_img(save_path="./output/")
-    #     res.save_to_json(save_path="./output/res.json")
     result = output[0]['rec_texts']
     logger.info(f"OCR output: {result}")
     return result

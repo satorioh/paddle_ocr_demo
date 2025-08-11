@@ -1,8 +1,9 @@
+import numpy as np
+import cv2
+import time
 from fastapi import APIRouter, File, UploadFile
 from src.utils.log import setup_logger
 from src.ocr.paddle_ocr import ocr_predict
-import numpy as np
-import cv2
 from pdf2image import convert_from_bytes
 
 logger = setup_logger(__name__)
@@ -35,8 +36,11 @@ async def recognize_ocr(file: UploadFile):
         return {"code": 200, "msg": "操作成功", "data": {"result": all_text}}
     else:
         # 处理图像文件
+        start_time = time.time()
         nparr = np.frombuffer(file_content, np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         text_list = ocr_predict(image)
+        elapsed_time = time.time() - start_time
+        logger.info(f"处理耗时: {elapsed_time:.3f}秒")
         return {"code": 200, "msg": "操作成功", "data": {"result": text_list}}
